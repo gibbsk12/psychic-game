@@ -1,0 +1,42 @@
+body, html{
+    height: 100%;
+    margin:0;
+    color: white;
+}
+
+.bg{
+    background-image: url("../images/background.jpg");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#guessesLeft{
+    color: red;
+    font-weight: bold;
+}
+
+h1{
+    font-family: 'Satisfy', cursive;
+}
+
+.container{
+    padding: 5%;
+}
+
+.btn{
+    margin: 5px;
+    width: 50px;
+    text-align: center;
+}
+
+.btn:visited{
+    background-color: white;
+    opacity: .5;
+}
+
+.btn:active{
+    background-color: #59126b;
+    color: white;
+}
