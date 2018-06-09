@@ -56,7 +56,8 @@ $(document).ready(function () {
             $("#guessesLeft").html(guessesRemaining)
             didYouLose();
         }
-        $(this).addClass("disabled");
+        $(this).addClass("disabled")
+        .attr("disabled", "disabled");
     }
 
 
