@@ -12,7 +12,7 @@ body, html{
     background-size: cover;
 }
 
-#guessesLeft{
+#guessesLeft, #totalWins, #totalLosses{
     color: red;
     font-weight: bold;
 }

@@ -6,26 +6,60 @@ $(document).ready(function () {
     var buttonDiv = $("#buttons"); //Get Element by Id for Buttons
     var computerGuess = "";
 
-    //Create a button for each letter of the alphabet
-    for (var i = 0; i < alphabet.length; i++){
-        var alphaButtons = $("<button>")
-        .addClass("btn")
-        .text(alphabet[i]);
-        buttonDiv.append(alphaButtons);
-    }
-
-    $(".btn").click(function(){
-        var userInput = this.value;
-        console.log(userInput);
-    })
-
-    function startNewGame(){
-        var computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+    // Function to choose a letter for the computer
+    function pickNewLetter() {
+        computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
         console.log(computerGuess)
     }
-    
+
+    pickNewLetter();
+
+    //Create a button for each letter of the alphabet
+    function makeButtons() {
+        for (var i = 0; i < alphabet.length; i++) {
+            var alphaButtons = $("<button>")
+                .addClass("btn btn-light")
+                .addClass("letter")
+                .attr("data-name", alphabet[i])
+                .text(alphabet[i]);
+            buttonDiv.append(alphaButtons);
+        }
+    }
+
+    makeButtons();
+
+    function startNewGame() {
+        guessesRemaining = 10;
+        $("#guessesLeft").html(guessesRemaining)
+        pickNewLetter();
+    }
+
+    function didYouLose() {
+        if (guessesRemaining === 0) {
+            alert("You have lost!");
+            lossCount++;
+            $("#totalLosses").html(lossCount);
+            startNewGame();
+        } 
+    }
+
+    function checkIfRight() {
+        var userGuess = $(this).attr("data-name");
+        console.log(userGuess);
+        if (userGuess === computerGuess) {
+            alert("Congratulations! You have won!");
+            winCount++
+            $("#totalWins").html(winCount);
+            startNewGame();
+        } else {
+            guessesRemaining--;
+            $("#guessesLeft").html(guessesRemaining)
+            didYouLose();
+        }
+        $(this).addClass("disabled");
+    }
 
 
+    $(document).on("click", ".letter", checkIfRight);
 
-    startNewGame();
 })
