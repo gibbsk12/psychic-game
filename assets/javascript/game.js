@@ -9,7 +9,7 @@ $(document).ready(function () {
     // Function to choose a letter for the computer
     function pickNewLetter() {
         computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
-        console.log(computerGuess)
+        console.log("The computer has guessed:"+computerGuess)
     }
 
     pickNewLetter();
@@ -32,11 +32,14 @@ $(document).ready(function () {
         guessesRemaining = 10;
         $("#guessesLeft").html(guessesRemaining)
         pickNewLetter();
+        buttonDiv.empty();
+        makeButtons();
     }
 
     function didYouLose() {
         if (guessesRemaining === 0) {
-            alert("You have lost!");
+            // alert("You have lost!");
+            $('#loseModal').modal('show')
             lossCount++;
             $("#totalLosses").html(lossCount);
             startNewGame();
@@ -47,7 +50,8 @@ $(document).ready(function () {
         var userGuess = $(this).attr("data-name");
         console.log(userGuess);
         if (userGuess === computerGuess) {
-            alert("Congratulations! You have won!");
+            // alert("Congratulations! You have won!");
+            $('#winModal').modal('show')
             winCount++
             $("#totalWins").html(winCount);
             startNewGame();
@@ -59,7 +63,6 @@ $(document).ready(function () {
         $(this).addClass("disabled")
         .attr("disabled", "disabled");
     }
-
 
     $(document).on("click", ".letter", checkIfRight);
 
